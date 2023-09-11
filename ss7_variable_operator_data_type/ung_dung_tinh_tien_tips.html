@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tips</title>
+</head>
+<body bgcolor="#8b4513">
+<table cellspacing="0" cellpadding="10" bgcolor="white">
+    <tr>
+        <th bgcolor="black" style="color: white; width: 300px">TIP CALCULATOR</th>
+    </tr>
+    <tr>
+        <td>How much was your bill?</td>
+    </tr>
+    <tr>
+        <td>$<input type="number" id="dola"></td>
+    </tr>
+    <tr>
+        <td>How was your service?</td>
+    </tr>
+    <tr>
+        <td>
+            <select style="height: 50px; width: 200px" id="percent">
+                <option value="30">30% - Outstanding</option>
+                <option value="20">20% - Good</option>
+                <option value="15">15% - It was OK</option>
+                <option value="10">10% - BAD</option>
+                <option value="5">5% - Terrible</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>How many peopel are sharing the bill?</td>
+    </tr>
+    <tr>
+        <td>
+            <input type="number" id="people"> people
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <button onclick="ClickButton()" style="height: 40px; width: 200px; color: white; background-color: crimson">
+                CALCULATE
+            </button>
+        </th>
+    </tr>
+    <tr>
+        <th>TIP AMOUNT</th>
+    </tr>
+    <tr>
+        <th id="out"></th>
+    </tr>
+    <tr>
+        <th>each</th>
+    </tr>
+</table>
+<script>
+    function ClickButton() {
+        let dola = document.getElementById('dola').value;
+        let percent = +document.getElementById('percent').value;
+        let people = document.getElementById('people').value;
+        let result;
+        if (percent === 30) {
+            result = dola * 0.3 / people;
+            document.getElementById('out').innerHTML = '$' + result + '.00';
+        } else if (percent === 20) {
+            result = dola * 0.2 / people;
+            document.getElementById('out').innerHTML = '$' + result + '.00';
+        } else if (percent === 15) {
+            result = dola * 0.15 / people;
+            document.getElementById('out').innerHTML = '$' + result + '.00';
+        } else if (percent === 10) {
+            result = dola * 0.1 / people;
+            document.getElementById('out').innerHTML = '$' + result + '.00';
+        } else if (percent === 5) {
+            result = dola * 0.05 / people;
+            document.getElementById('out').innerHTML = '$' + result + '.00';
+        }
+    }
+</script>
+</body>
+</html>
