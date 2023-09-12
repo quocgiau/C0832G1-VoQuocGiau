@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+<script>
+        let a = +prompt('Nhập cạnh a');
+        let b = +prompt('Nhập cạnh b');
+        let c = +prompt('Nhập cạnh c');
+        if (a === b && b !== c) {
+            if (a * a + b * b === c * c) {
+                alert('Tam giác là tam giác vuông cân')
+            } else {
+                alert('Tam giác không phải là tam giác vuông cân')
+            }
+        } else if (a === c && b !== c) {
+            if (a * a + c * c === b * b) {
+                alert('Tam giác là tam giác vuông cân')
+            } else {
+                alert('Tam giác không phải là tam giác vuông cân')
+            }
+        } else if (b === c && a !== c) {
+            if (b * b + c * c === a * a) {
+                alert('Tam giác là tam giác vuông cân')
+            } else {
+                alert('Tam giác không phải là tam giác vuông cân ')
+            }
+        } else {
+            alert('Tam giác không phải là tam giác vuông cân')
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<h2>a = 3; b = 5; c = 2; d = 4</h2>
+<button onclick="ClickMax()">Max</button>
+<button onclick="ClickMin()">Min</button>
+<button onclick="ClickAscending()">Tăng dần</button>
+<button onclick="ClickDecrease()">Giảm dần</button>
+<br>
+<br>
+<div id="max"></div>
+<div id="min"></div>
+<div id="ascending"></div>
+<div id="decrease"></div>
+
+<script>
+    let arr = [3, 5, 2, 4];
+
+    function ClickMax() {
+        let max = arr[0];
+        for (let i = 0; i < 4; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        document.getElementById('max').innerHTML = 'Số lớn nhất trong dãy là: ' + max;
+    }
+
+    function ClickMin() {
+        let min = arr[0];
+        for (let i = 0; i < 4; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        document.getElementById('min').innerHTML = 'Số bé nhất trong dãy là: ' + min;
+    }
+
+    function ClickAscending() {
+        arr.sort((a, b) => a - b);
+        document.getElementById('ascending').innerHTML = 'Dãy số theo thứ tự tăng dần là: ' + arr;
+    }
+
+    function ClickDecrease() {
+        arr.sort((a, b) => b - a);
+        document.getElementById('decrease').innerHTML = 'Dãy số theo thứ tự giảm dần là: ' + arr;
+    }
+</script>
+</body>
+</html>
