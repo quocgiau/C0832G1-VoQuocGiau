@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<script>
+    let tien = +prompt('Nhập lương nhân viên');
+    let gio = +prompt('Nhập giờ làm việc của nhân viên');
+    let thuong;
+    if (100 <= gio && gio < 200) {
+        thuong = tien * 0.1;
+        alert('Số tiền nhân viên được thưởng là: ' + thuong + 'Đ')
+    } else {
+        alert('Nhân viên này không được thưởng')
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    let day = +prompt('Nhập tổng số buổi của Module');
+    let rest = +prompt('Nhập số buổi nghỉ')
+    let result = rest / day * 100;
+    if (result >= 20) {
+        alert('Học viên đã nghỉ ' + result + '% buộc phải chuyển lớp')
+    } else if (result > 10) {
+        alert('Học viên đã nghỉ ' + result + '% cần gửi mail warning')
+    }
+
+</script>
+</body>
+</html>

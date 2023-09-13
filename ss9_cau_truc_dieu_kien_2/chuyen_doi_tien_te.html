@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+    <script>
+
+    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Amount</th>
+        <th>From Currency</th>
+        <th>To Currency</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th><input type="text" name="tien" id="money" placeholder="Nhập ở đây" size="20"></th>
+        <th><select id="front">
+            <option value="USD">USD</option>
+            <option value="JPY">JPY</option>
+            <option value="VND">VND</option>
+            <option value="RMB">RMB</option>
+            <option value="GBP">GBP</option>
+        </select></th>
+        <th><select id="behind">
+            <option value="USD">USD</option>
+            <option value="JPY">JPY</option>
+            <option value="VND">VND</option>
+            <option value="RMB">RMB</option>
+            <option value="GBP">GBP</option>
+        </select></th>
+        <th>
+            <button type="button" onclick="ClickButton() ">Convert</button>
+        </th>
+    </tr>
+    <tr>
+        <th></th>
+    </tr>
+    <tr>
+        <th></th>
+    </tr>
+    <tr>
+        <td id="root"></td>
+    </tr>
+</table>
+<script>
+    function ClickButton() {
+        let front = document.getElementById("front").value;
+        let behind = document.getElementById("behind").value;
+        let enter = document.getElementById("money").value;
+        let result;
+        if (front === "VND" && behind === "USD") {
+            result = enter / 23890;
+        } else if (front === "VND" && behind === "JPY") {
+            result = enter / 166;
+        } else if (front === "VND" && behind === "RMB") {
+            result = enter / 3307;
+        } else if (front === "VND" && behind === "GBP") {
+            result = enter / 29588;
+        } else if (front === "USD" && behind === "VND") {
+            result = enter * 23890;
+        } else if (front === "USD" && behind === "JPY") {
+            result = enter * 147;
+        } else if (front === "USD" && behind === "GBP") {
+            result = enter / 1.25;
+        } else if (front === "USD" && behind === "RMB") {
+            result = enter * 7.29;
+        } else if (front === "JPY" && behind === "VND") {
+            result = enter * 166;
+        } else if (front === "JPY" && behind === "USD") {
+            result = enter / 147;
+        } else if (front === "JPY" && behind === "GBP") {
+            result = enter / 184;
+        } else if (front === "JPY" && behind === "RMB") {
+            result = enter / 20.22;
+        } else if (front === "RMB" && behind === "GBP") {
+            result = enter / 9.10;
+        } else if (front === "RMB" && behind === "USD") {
+            result = enter / 7.29;
+        } else if (front === "RMB" && behind === "VND") {
+            result = enter * 3307;
+        } else if (front === "RMB" && behind === "JPY") {
+            result = enter * 20.22;
+        } else if (front === "GBP" && behind === "JPY") {
+            result = enter * 184;
+        } else if (front === "GBP" && behind === "VND") {
+            result = enter * 29588;
+        } else if (front === "GBP" && behind === "USD") {
+            result = enter * 1.25;
+        } else if (front === "GBP" && behind === "RMB") {
+            result = enter * 9.10;
+        } else {
+            result = enter;
+        }
+        document.getElementById("root").innerText = "Result: " + result;
+    }
+</script>
+</body>
+</html>
