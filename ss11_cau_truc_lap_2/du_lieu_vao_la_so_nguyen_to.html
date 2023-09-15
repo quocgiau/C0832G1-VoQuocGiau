@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
 </head>
 <body>
-$END$
+<script>
+    do {
+        let number;
+        let count = 0;
+        do {
+            number = +prompt('Nhập số bất kỳ');
+            if (isNaN(number)) {
+                alert('Bạn cần nhập số để kiểm tra')
+            } else if (number < 2) {
+                alert('Đây không phải là số nguyên tố. Hãy nhập lại')
+            } else {
+                break;
+            }
+        } while (true)
+        for (let i = 2; i < number; i++) {
+            if (number % i === 0) {
+                count++;
+            }
+        }
+        if (count === 0) {
+            alert('Đây là số nguyên tố')
+            break;
+        } else {
+            alert('Đây không phải là số nguyên tố. Hãy nhập lại')
+        }
+    } while (true)
+</script>
 </body>
 </html>

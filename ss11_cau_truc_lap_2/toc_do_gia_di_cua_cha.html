@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
 </head>
 <body>
-$END$
+<script>
+    let child;
+    let dad;
+    do {
+        child = +prompt('Nhập tuổi của con')
+        if (child <= 0 || isNaN(child)) {
+            alert('Tuổi cần là số và lớn hớn 0');
+        } else {
+            do {
+                dad = +prompt('Nhập tuổi của bố')
+                if (dad >= child + 25 || !isNaN(dad)) {
+                    break;
+                } else {
+                    alert('tuổi cha cần là số và hơn tuổi con ít nhất là 25 tuổi')
+                }
+            } while (true)
+            break;
+        }
+    } while (true)
+    let year = 0;
+    while (dad > child * 2) {
+        dad = dad + 1;
+        child = child + 1;
+        year = year + 1;
+    }
+    alert("Tuổi cha gấp đôi tuổi con sau " + year + " năm nữa");
+</script>
 </body>
 </html>
