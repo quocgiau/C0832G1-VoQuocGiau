@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+<div id="check"></div>
+<br>
+<button type="button" onclick="clickButton()">Kiểm tra</button>
+<script>
+    let arr = [];
+    do {
+        let range = +prompt('Nhập sô phần tử trong mảng')
+        for (let i = 1; i <= range; i++) {
+            let number = +prompt('Nhập số thứ ' + i + ' trong mảng')
+            if (isNaN(number)) {
+                alert('Bạn cần nhập số')
+                i--;
+            } else {
+                arr.push(number)
+            }
+        }
+        if (isNaN(range) || range <= 0) {
+            alert('Bạn cần nhập số và số cần lớn hơn 0');
+        } else {
+            break;
+        }
+    } while (true)
+    document.getElementById('check').innerHTML='Mảng vừa tạo là: ' + arr;
+    function clickButton() {
+        let even = 0;
+        let odd = 0;
+        for (let y = 0; y < arr.length; y++){
+            if (arr[y] % 2 === 0){
+                even++;
+            }else {
+                odd++;
+            }
+        }
+        if (even === odd){
+            alert('OK');
+        }else {
+            alert('NO')
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<script>
+    let arr = [];
+    do {
+        let range = +prompt('Nhập sô phần tử trong mảng')
+        for (let i = 1; i <= range; i++) {
+            let number = +prompt('Nhập số thứ ' + i + ' trong mảng')
+            if (isNaN(number)) {
+                alert('Bạn cần nhập số')
+                i--;
+            } else {
+                arr.push(number)
+            }
+        }
+        if (isNaN(range) || range <= 0) {
+            alert('Bạn cần nhập số và số cần lớn hơn 0');
+        } else {
+            break;
+        }
+    } while (true)
+    document.write('Mảng vừa tạo là: ' + arr + '</br>');
+    let arrNew = [];
+    for (let y = 0; y < arr.length; y++) {
+        let square = Math.sqrt(arr[y])
+        if (square % 1 === 0) {
+            arrNew.push(arr[y])
+        }
+    }
+    document.write('Các số chính phương là ' + arrNew)
+</script>
+</body>
+</html>
