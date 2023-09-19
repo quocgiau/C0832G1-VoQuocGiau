@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<script>
+    let arr = [];
+    let row;
+    let column;
+    do {
+        row = +prompt('Nhập số hàng');
+        if (isNaN(row) || row <= 0) {
+            alert('Bạn cần nhập số và số cần lớn hơn 0');
+        } else {
+            break;
+        }
+    } while (true)
+    do {
+        column = +prompt('Nhập số cột');
+        if (isNaN(column) || column <= 0) {
+            alert('Bạn cần nhập số và số cần lớn hơn 0');
+        } else {
+            break;
+        }
+    } while (true)
+    for (let i = 0; i < row; i++) {
+        arr[i] = [];
+        for (let y = 0; y < column; y++) {
+            let number = +prompt('Nhập phần tử ở vị trí [' + i + '][' + y + ']');
+            if (isNaN(number)) {
+                alert('Vui lòng nhập số');
+                y--;
+            } else {
+                arr[i].push(number);
+            }
+        }
+    }
+    document.write('Mảng 2d vừa tạo là: ' + '</br>');
+    for (let m = 0; m < arr.length; m++) {
+        document.write(arr[m] + '</br>');
+    }
+    let sum = 0;
+    for (let x = 0; x < arr.length; x++) {
+        for (let z = 0; z < arr[x].length; z++) {
+            if (x === z) {
+                sum += arr[x][z];
+            }
+            if (z === arr[x].length - x - 1) {
+                sum += arr[x][z];
+            }
+        }
+    }
+    document.write('Tổng các phần tử 2 đường chéo của mảng là: ' + sum);
+</script>
+</body>
+</html>
