@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    let number = prompt('Nhập số để kiểm tra');
+
+    function findMaxNumber(n) {
+        let arr = n.split("");
+        let result;
+        if (arr.length !== 4) {
+            return -1;
+        } else {
+            for (let i = 0; i < arr.length; i++) {
+                if (isNaN(arr[i])) {
+                    return -1;
+                }
+            }
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] < arr[i + 1]) {
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+            if (arr.length === 4) {.
+                arr.pop();
+            }
+            let chain = arr.join('');
+            result = parseInt(chain);
+            return result;
+        }
+    }
+// Bài khó
+    alert('Kết quả sau khi kiếm tra là: ' + findMaxNumber(number));
+</script>
+</body>
+</html>
