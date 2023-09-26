@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ngân hàng ABC</title>
+</head>
+<style>
+    button {
+        background-color: black;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s,
+        color 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+        background-color: #2980B9;
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        color: black;
+    }
+
+    th, td {
+        border: 1px solid #E0E0E0;
+        padding: 0.8rem;
+        text-align: center;
+    }
+
+    th {
+        background-color: #2980B9;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+        background-color: #F2F2F2;
+    }
+
+    tr:hover {
+        background-color: #E0E0E0;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+<body>
+<h1>ABC BANK</h1>
+<div id="ABCBank"></div>
+<br>
+<br>
+<button type="button" onclick="addAccount(lit)">Thêm tài khoản</button>
+<button type="button" onclick="editAccount(lit)">Sửa tài khoản</button>
+<button type="button" onclick="deleteAccount(lit)">Xóa tài khoản</button>
+<button type="button" onclick="checkAccount(lit)">Kiểm tra tài khoản</button>
+<button type="button" onclick="addMoney(lit)">Nạp tiền</button>
+<button type="button" onclick="outMoney(lit)">Rút tiền</button>
+<script>
+    class Bank {
+        constructor(STK, name, money) {
+            this.STK = STK;
+            this.name = name;
+            this.money = money;
+        }
+
+        getSTK() {
+            return this.STK;
+        }
+
+        setSTK(newSTK) {
+            if (!isNaN(newSTK)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        setName(newName) {
+            if (isNaN(newName)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        getMoney() {
+            return this.money;
+        }
+
+        setMoney(newMoney) {
+            if (!isNaN(newMoney)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    let stk1 = new Bank(7777, 'Võ Quốc Giàu', 1000000)
+    let stk2 = new Bank(8888, 'Võ Giàu', 500000)
+    let stk3 = new Bank(9999, 'Quốc Giàu', 0)
+    let lit = [stk1, stk2, stk3];
+
+    function display(arr) {
+        let table = `<table border="0" cellspacing="0" style="width: 1916px; margin-left: -6px">
+            <tr> <th>Số tài khoản</th>
+            <th>Tên tài khoản</th>
+            <th>Số tiền trong tài khoản</th>
+            </tr>`
+        for (let i = 0; i < arr.length; i++) {
+            table += `<tr>
+                <td>` + 'STK-' + arr[i].getSTK() + `</td>
+                <td>` + arr[i].getName() + `</td>
+                <td>` + arr[i].getMoney() + `</td>
+            </tr>`
+        }
+        table += `</table>`;
+        document.getElementById('ABCBank').innerHTML = table;
+
+    }
+
+    display(lit)
+
+    function addMoney(arr) {
+        let check = checkInput('số tài khoản bạn muốn nạp tiền')
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (check == arr[i].getSTK()) {
+                count = 1;
+                let input = +prompt('Nhập số tiền bạn muốn nạp vào tài khoản')
+                arr[i].money += input
+            }
+        }
+        if (count === 0) {
+            alert('Số tài khoản không tồn tại')
+        }
+        display(arr)
+    }
+
+    function outMoney(arr) {
+        let check = checkInput('số tài khoản bạn muốn rút tiền')
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (check == arr[i].STK) {
+                count = 1;
+                if (arr[i].money <= 0) {
+                    alert('Tài khoản của bạn đã hết tiền')
+                } else {
+                    do {
+                        let input = +prompt('Nhập số tiền bạn muốn rút khỏi tài khoản')
+                        if (input > arr[i].money) {
+                            alert('Tài khoản của bạn không đủ')
+                        } else {
+                            arr[i].money -= input
+                            break;
+                        }
+                    } while (true)
+                }
+            }
+        }
+        if (count === 0) {
+            alert('Số tài khoản không tồn tại')
+        }
+        display(arr)
+    }
+
+    function checkAccount(arr) {
+        let check = checkInput('số tài khoản bạn muốn kiểm tra')
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (check == arr[i].STK) {
+                count = 1
+                alert(`Chủ tài khoản: ${arr[i].name}  Với số tài khoản: ${arr[i].STK}  Có số tiền là: ${arr[i].money}`)
+            }
+        }
+        if (count === 0) {
+            alert('Số tài khoản không tồn tại')
+        }
+    }
+
+    function addAccount(arr) {
+        let newAccount = new Bank();
+        let newSTK = +checkInput('số tài khoản mới:')
+        for (let i = 0; i < arr.length; i++) {
+            if (newSTK == arr[i].STK) {
+                alert('Sô tài khoản này dã tồn tại');
+                return;
+            }
+        }
+        do {
+            if (newAccount.setSTK(newSTK)) {
+                break;
+            } else {
+                alert('Nhập số tài khoản phải là số');
+            }
+        } while (true);
+        let newName;
+        do {
+            newName = checkInput('tên mới:');
+            if (newAccount.setName(newName)) {
+                break;
+            } else {
+                alert('Nhập kí tự hoặc chuỗi kí tự cho tên');
+            }
+        } while (true);
+        let newMoney;
+        do {
+            newMoney = +checkInput('tiền:')
+            if (newAccount.setMoney(newMoney)) {
+                break;
+            } else {
+                alert('Bạn cần nhập số');
+            }
+        } while (true);
+        arr.push(new Bank(newSTK, newName, newMoney));
+        display(arr);
+    }
+
+    function editAccount(arr) {
+        let check = checkInput('số tài khoản bạn muốn sửa');
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (check == arr[i].STK) {
+                count = 1;
+                let newName;
+                do {
+                    newName = checkInput('tên mới:');
+                    if (arr[i].setName(newName)) {
+                        arr[i].name = newName;
+                        break;
+                    } else {
+                        alert('Nhập kí tự hoặc chuỗi kí tự cho tên');
+                    }
+                } while (true);
+                let newMoney;
+                do {
+                    newMoney = checkInput('tiền:')
+                    if (arr[i].setMoney(newMoney)) {
+                        arr[i].money = newMoney;
+                        break;
+                    } else {
+                        alert('Bạn cần nhập số');
+                    }
+                } while (true);
+            }
+        }
+        if (count === 0) {
+            alert('Số tài khoản bạn vừa nhập không tồn tại');
+        }
+        display(arr);
+    }
+
+    function deleteAccount(arr) {
+        let check = checkInput('số tài khoản bạn muốn xóa');
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (check == arr[i].STK) {
+                count = 1;
+                let decision = confirm(`Bạn có chắc muốn xóa tài khoản ${arr[i].name} không ?`);
+                if (decision === true) {
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        if (count === 0) {
+            alert('Số tài khoản bạn vừa nhập không tồn tại');
+        }
+        display(arr);
+    }
+
+    function checkInput(inputSth) {
+        let input = prompt(`Nhập ${inputSth}`);
+        while (true) {
+            if (input != null && input != undefined && input != "") {
+                return input;
+            } else {
+                alert(`Không được để trống ${inputSth}`);
+                input = prompt(`Nhập ${inputSth}`);
+            }
+        }
+    }
+</script>
+</body>
+</html>
