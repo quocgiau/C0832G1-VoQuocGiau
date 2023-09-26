@@ -77,7 +77,7 @@
         }
 
         setSTK(newSTK) {
-            if (!isNaN(newSTK)) {
+            if (!isNaN(newSTK) && newSTK > 0) {
                 return true;
             } else {
                 return false;
@@ -101,7 +101,7 @@
         }
 
         setMoney(newMoney) {
-            if (!isNaN(newMoney)) {
+            if (!isNaN(newMoney) && newMoney >= 0) {
                 return true;
             } else {
                 return false;
@@ -122,7 +122,7 @@
             </tr>`
         for (let i = 0; i < arr.length; i++) {
             table += `<tr>
-                <td>` + 'STK-' + arr[i].getSTK() + `</td>
+                <td>` + 'STK - ' + arr[i].getSTK() + `</td>
                 <td>` + arr[i].getName() + `</td>
                 <td>` + arr[i].getMoney() + `</td>
             </tr>`
@@ -203,14 +203,15 @@
 
     function addAccount(arr) {
         let newAccount = new Bank();
-        let newSTK = +checkInput('số tài khoản mới:')
+        let newSTK;
+        do {
+         newSTK = checkInput('số tài khoản mới:')
         for (let i = 0; i < arr.length; i++) {
             if (newSTK == arr[i].STK) {
                 alert('Sô tài khoản này dã tồn tại');
                 return;
             }
         }
-        do {
             if (newAccount.setSTK(newSTK)) {
                 break;
             } else {
