@@ -5,6 +5,12 @@
     <title>Ngân hàng ABC</title>
 </head>
 <style>
+    table {
+        border-spacing: 0;
+        width: 1916px;
+        margin-left: -6px
+    }
+
     button {
         background-color: black;
         border: none;
@@ -77,11 +83,7 @@
         }
 
         setSTK(newSTK) {
-            if (!isNaN(newSTK) && newSTK > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return (!isNaN(newSTK) && newSTK > 0);
         }
 
         getName() {
@@ -89,115 +91,107 @@
         }
 
         setName(newName) {
-            if (isNaN(newName)) {
-                return true;
-            } else {
-                return false;
-            }
+            return (isNaN(newName));
         }
 
         getMoney() {
-            return this.money;
+            return this.money.toLocaleString();
         }
 
         setMoney(newMoney) {
-            if (!isNaN(newMoney) && newMoney >= 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return (!isNaN(newMoney) && newMoney >= 0);
         }
     }
 
-    let stk1 = new Bank(7777, 'Võ Quốc Giàu', 1000000)
-    let stk2 = new Bank(8888, 'Võ Giàu', 500000)
-    let stk3 = new Bank(9999, 'Quốc Giàu', 0)
+    let stk1 = new Bank(7777, 'Võ Quốc Giàu', 1000000);
+    let stk2 = new Bank(8888, 'Võ Giàu', 500000);
+    let stk3 = new Bank(9999, 'Quốc Giàu', 0);
     let lit = [stk1, stk2, stk3];
 
     function display(arr) {
-        let table = `<table border="0" cellspacing="0" style="width: 1916px; margin-left: -6px">
+        let table = `<table>
             <tr> <th>Số tài khoản</th>
             <th>Tên tài khoản</th>
             <th>Số tiền trong tài khoản</th>
             </tr>`
         for (let i = 0; i < arr.length; i++) {
             table += `<tr>
-                <td>` + 'STK - ' + arr[i].getSTK() + `</td>
-                <td>` + arr[i].getName() + `</td>
-                <td>` + arr[i].getMoney() + `</td>
+                <td> STK - ${arr[i].getSTK()} </td>
+                <td> ${arr[i].getName()}</td>
+                <td>${arr[i].getMoney()}VND</td>
             </tr>`
         }
         table += `</table>`;
         document.getElementById('ABCBank').innerHTML = table;
-
     }
 
-    display(lit)
+    display(lit);
 
     function addMoney(arr) {
-        let check = checkInput('số tài khoản bạn muốn nạp tiền')
+        let check = checkInput('số tài khoản bạn muốn nạp tiền');
         let count = 0;
         for (let i = 0; i < arr.length; i++) {
-            if (check == arr[i].getSTK()) {
+            if (check.localeCompare(arr[i].getSTK()) === 0) {    //Dùng localeCompare thay cho == để tránh lỗi  Tìm thấy trên GPT
                 count = 1;
                 do {
-                    let input = +prompt('Nhập số tiền bạn muốn nạp vào tài khoản')
+                    let input = +prompt('Nhập số tiền bạn muốn nạp vào tài khoản');
                     if (input > 0) {
-                        arr[i].money += input
-                        alert('Bạn đã nạp tiền vào tài khoản thành công')
+                        arr[i].money += input;
+                        alert('Bạn đã nạp tiền vào tài khoản thành công');
                         break;
                     } else {
-                        alert('Nhập sai. Vui lòng nhập lại')
+                        alert('Nhập sai. Vui lòng nhập lại');
                     }
-                }while (true)
+                } while (true);
             }
         }
         if (count === 0) {
-            alert('Số tài khoản không tồn tại')
+            alert('Số tài khoản không tồn tại');
         }
-        display(arr)
+        display(arr);
     }
 
     function outMoney(arr) {
-        let check = checkInput('số tài khoản bạn muốn rút tiền')
+        let check = checkInput('số tài khoản bạn muốn rút tiền');
         let count = 0;
         for (let i = 0; i < arr.length; i++) {
-            if (check == arr[i].STK) {
+            if (check.localeCompare(arr[i].getSTK()) === 0) {              //Dùng localeCompare thay cho == để tránh lỗi  Tìm thấy trên GPT
                 count = 1;
                 if (arr[i].money <= 0) {
-                    alert('Tài khoản của bạn đã hết tiền')
+                    alert('Tài khoản của bạn đã hết tiền');
                 } else {
                     do {
-                        let input = +prompt('Nhập số tiền bạn muốn rút khỏi tài khoản')
+                        let input = +prompt('Nhập số tiền bạn muốn rút khỏi tài khoản');
                         if (input > arr[i].money) {
-                            alert('Tài khoản của bạn không đủ')
-                        } else if (input > 0){
-                            arr[i].money -= input
+                            alert('Tài khoản của bạn không đủ');
+                        } else if (input > 0) {
+                            arr[i].money -= input;
+                            alert('Bạn đã rút tiền khỏi tài khoản thành công');
                             break;
-                        }else {
-                            alert('Nhập sai. Vui lòng nhập lại')
+                        } else {
+                            alert('Nhập sai. Vui lòng nhập lại');
                         }
-                    } while (true)
+                    } while (true);
                 }
             }
         }
         if (count === 0) {
-            alert('Số tài khoản không tồn tại')
+            alert('Số tài khoản không tồn tại');
         }
-        display(arr)
+        display(arr);
     }
 
     function checkAccount(arr) {
-        let check = checkInput('số tài khoản bạn muốn kiểm tra')
+        let check = checkInput('số tài khoản bạn muốn kiểm tra');
         let count = 0;
         for (let i = 0; i < arr.length; i++) {
-            if (check == arr[i].STK) {
-                count = 1
-                alert(`Chủ tài khoản: ${arr[i].name}  Với số tài khoản: ${arr[i].STK}  Có số tiền là: ${arr[i].money}`)
+            if (check.localeCompare(arr[i].getSTK()) === 0) {
+                count = 1;
+                alert(`Chủ tài khoản: ${arr[i].name}  Với số tài khoản: ${arr[i].STK}  Có số tiền là: ${arr[i].money}`);
             }
         }
         if (count === 0) {
-            alert('Số tài khoản không tồn tại')
+            alert('Số tài khoản không tồn tại');
         }
     }
 
@@ -205,13 +199,13 @@
         let newAccount = new Bank();
         let newSTK;
         do {
-         newSTK = checkInput('số tài khoản mới:')
-        for (let i = 0; i < arr.length; i++) {
-            if (newSTK == arr[i].STK) {
-                alert('Sô tài khoản này dã tồn tại');
-                return;
+            newSTK = checkInput('số tài khoản mới:');
+            for (let i = 0; i < arr.length; i++) {
+                if (newSTK.localeCompare(arr[i].getSTK()) === 0) {
+                    alert('Sô tài khoản này dã tồn tại');
+                    return;
+                }
             }
-        }
             if (newAccount.setSTK(newSTK)) {
                 break;
             } else {
@@ -229,7 +223,7 @@
         } while (true);
         let newMoney;
         do {
-            newMoney = +checkInput('tiền:')
+            newMoney = +checkInput('tiền:');
             if (newAccount.setMoney(newMoney)) {
                 break;
             } else {
@@ -244,7 +238,7 @@
         let check = checkInput('số tài khoản bạn muốn sửa');
         let count = 0;
         for (let i = 0; i < arr.length; i++) {
-            if (check == arr[i].STK) {
+            if (check.localeCompare(arr[i].getSTK()) === 0) {
                 count = 1;
                 let newName;
                 do {
@@ -258,7 +252,7 @@
                 } while (true);
                 let newMoney;
                 do {
-                    newMoney = checkInput('tiền:')
+                    newMoney = checkInput('tiền:');
                     if (arr[i].setMoney(newMoney)) {
                         arr[i].money = newMoney;
                         break;
@@ -278,7 +272,7 @@
         let check = checkInput('số tài khoản bạn muốn xóa');
         let count = 0;
         for (let i = 0; i < arr.length; i++) {
-            if (check == arr[i].STK) {
+            if (check.localeCompare(arr[i].getSTK()) === 0) {
                 count = 1;
                 let decision = confirm(`Bạn có chắc muốn xóa tài khoản ${arr[i].name} không ?`);
                 if (decision === true) {
@@ -296,7 +290,7 @@
     function checkInput(inputSth) {
         let input = prompt(`Nhập ${inputSth}`);
         while (true) {
-            if (input != null && input != undefined && input != "") {
+            if (input!== null && input !== undefined && input !== "") {
                 return input;
             } else {
                 alert(`Không được để trống ${inputSth}`);
