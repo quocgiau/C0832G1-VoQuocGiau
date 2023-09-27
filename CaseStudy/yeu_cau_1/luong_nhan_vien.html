@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+<script>
+    let wage ;
+    let tax = 0;
+    let salary = 0;
+    do {
+        wage = +prompt("Nhập vào lương của bạn: ");
+        if (wage > 0) {
+            if (wage > 15000000) {
+                tax = wage * 0.2;
+            } else if (wage >= 7000000) {
+                tax = wage * 0.1;
+            } else {
+                tax = wage * 0.05;
+            }
+            salary = wage - tax;
+            break;
+        } else {
+            alert("Lương phải lớn hơn 0");
+        }
+    }
+    while (true);
+    alert('Lương bạn nhận là: ' + salary + "           Thuế phải trả là: " + tax);
+</script>
+</body>
+</html>
