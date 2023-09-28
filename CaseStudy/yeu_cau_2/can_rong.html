@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    let high = +prompt('Nhập độ cao của tam giác');
+    for (let i = 0; i <= high; i++) {
+        for (let j = 1; j <= high + i - 1; j++) {
+            if (j <= high - i) {
+                document.write('&nbsp&nbsp');
+            } else {
+                if (j === high + i - 1 || j === high - i + 1 || i === high) {
+                    document.write("*")
+                } else {
+                    document.write('&nbsp&nbsp');
+                }
+            }
+        }
+        document.write('<br>');
+    }
+</script>
+</body>
+</html>
