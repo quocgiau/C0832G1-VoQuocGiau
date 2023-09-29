@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+<script>
+    let characters = prompt('Nhập chuỗi ký tự mà bạn muốn chuẩn hóa');
+    function standardized(a) {
+        let arr = a.split('')
+        let chain;
+        while (arr[0] === ' ') {
+            arr.shift()
+        }
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === ' ' && arr[i + 1] === ' ') {
+                arr.splice(i, 1)
+                i--
+            }
+        }
+        arr[0] = arr[0].toUpperCase()
+        for (let j = 1; j < arr.length - 1; j++) {
+            if (arr[j] === ' ') {
+                arr[j + 1] = arr[j + 1].toUpperCase();
+            } else {
+                arr[j + 1] = arr[j + 1].toLowerCase();
+            }
+        }
+        chain = arr.join('');
+        return chain;
+    }
+    document.write(`Chuỗi ký tự bạn nhập vào là: ${characters} </br>`)
+    document.write(`Chuỗi ký tự sau khi chuẩn hoá là: ${standardized(characters)} </br>`)
+
+    function longestWord(a) {
+        let arr = a.split(' ')
+        let max = 0;
+        let index;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].length > max) {
+                max = arr[i].length;
+                index = i;
+            }
+        }
+        return arr[index]
+    }
+    document.write(`Từ dài nhất trong chuỗi ký tự bạn vừa nhập là: ${longestWord(standardized(characters))}`)
+</script>
+</body>
+</html>

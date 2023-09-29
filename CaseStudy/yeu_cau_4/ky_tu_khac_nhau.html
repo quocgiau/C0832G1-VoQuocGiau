@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<script>
+    let characters = prompt('Nhập chuỗi ký tự mà bạn muốn kiểm tra');
+    let arrNew = [];
+    function differentSymbolsNaive(s) {
+        let arr = s.split('');
+        for (let i = 0; i < arr.length; i++){
+            if (!arrNew.includes(arr[i]) && arr[i] !== ' '){
+                arrNew.push(arr[i])
+            }
+        }
+        return arrNew;
+    }
+    differentSymbolsNaive(characters)
+    document.write(`Chuỗi ký tự mà bạn nhập vào là: ${characters}</br>`)
+    document.write(`Có ${arrNew.length} ký tự khác nhau là: ${arrNew}`)
+</script>
+</body>
+</html>
