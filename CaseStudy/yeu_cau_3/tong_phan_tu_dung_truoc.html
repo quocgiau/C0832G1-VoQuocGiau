@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+<script>
+    let number = prompt("Nhập vào chiều dài mảng");
+    let arr1 = [];
+    let arr2 = [];
+    for (let i = 0; i < number; i++) {
+        do {
+            arr1[i] = +prompt(`Nhập vào phần tử thứ ${i + 1}`);
+            if (isNaN(arr1[i])) {
+                alert('Bạn cần nhập số');
+            } else {
+                break;
+            }
+        } while (true);
+    }
+
+    function PrefixSums(a) {
+        let sum = 0;
+        for (let i = 0; i < a.length; i++) {
+            sum += a[i];
+            arr2.push(sum);
+        }
+        return arr2;
+    }
+
+    document.write(`Mảng bạn đã tạo là: ${arr1}</br>`);
+    document.write(`Prefix Sums của mảng bạn vừa tạo là: ${PrefixSums(arr1)}`);
+</script>
+</body>
+</html>

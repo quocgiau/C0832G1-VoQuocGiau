@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    let arr1 = [5, 2, 5];
+    let arr2 = [6, 3, 4];
+    let maxIndex = 0;
+    let max = arr1[0] / arr2[0];
+    let numerator = 0;
+    let denominator = 0;
+
+    for (let i = 1; i < arr1.length; i++) {
+        let fraction = arr1[i] / arr2[i];
+        if (fraction > max) {
+            max = fraction;
+            maxIndex = i;
+            numerator = arr1[i];
+            denominator = arr2[i];
+        }
+    }
+    alert(`Phân số lớn nhất là ${numerator}/${denominator}, có chỉ số là ${maxIndex}.`);
+</script>
+</body>
+</html>
