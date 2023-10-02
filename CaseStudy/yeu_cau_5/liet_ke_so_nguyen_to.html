@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<script>
+    let row = +prompt("Nhập hàng ");
+    let col = +prompt("Nhập cột ");
+    let arr = new Array(row);
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = new Array(col);
+        for (let j = 0; j < arr[i].length; j++) {
+            arr[i][j] = +prompt("Nhập vào phần tư ở vị trí [" + i + '][' + j + '] :');
+        }
+    }
+    document.write(`Mảng vừa tạo là: </br>`);
+    for (let a = 0; a < arr.length; a++) {
+        for (let b = 0; b < arr[a].length; b++) {
+            document.write(arr[a][b] + '&nbsp;');
+        }
+        document.write('</br>');
+    }
+
+    let arrSNT = [];
+
+    function checkSNTArr2d(arr) {
+        for (let x = 0; x < arr.length; x++) {
+            for (let y = 0; y < arr[x].length; y++) {
+                checkSNT(arr[x][y]);
+            }
+        }
+        document.write(`Có ${arrSNT.length} số nguyên tố trong mảng 2 chiều vừa tạo đó là: ${arrSNT}`);
+    }
+
+    function checkSNT(a) {
+        let check = 0;
+        for (let k = 2; k <= a / 2; k++) {
+            if (a % k === 0) {
+                check++;
+            }
+        }
+        if (check === 0 && a >= 2) {
+            arrSNT.push(a);
+        }
+    }
+    checkSNTArr2d(arr);
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    let row = +prompt('Nhập số hàng: ');
+    let col = +prompt('Nhập số cột: ');
+    let arr = new Array(row);
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = new Array(col);
+        for (let j = 0; j < arr[i].length; j++) {
+            arr[i][j] = +prompt(`Nhập vào số nguyên là phần tử [${i}][${j}]`);
+        }
+    }
+    document.write(`Mảng 2 chiều vừa tạo là: </br>`);
+    for (let x = 0; x < arr.length; x++) {
+        for (let y = 0; y < arr[x].length; y++) {
+            document.write(arr[x][y] + '&nbsp');
+        }
+        document.write('<br>');
+    }
+
+    function minArr2d(arr2d) {
+        let min = arr2d[0][0];
+        for (let a = 0; a < arr2d.length; a++) {
+            for (let b = 0; b < arr2d[a].length; b++) {
+                if (arr2d[a][b] <= min) {
+                    min = arr2d[a][b];
+                }
+            }
+        }
+        return min;
+    }
+
+    function maxArr2d(arr2d) {
+        let max = arr2d[0][0];
+        for (let i = 0; i < arr2d.length; i++) {
+            for (let j = 0; j < arr2d[i].length; j++) {
+                if (arr2d[i][j] >= max) {
+                    max = arr2d[i][j];
+                }
+            }
+        }
+        return max;
+    }
+
+    document.write(`Phần tử nhỏ nhất trong mảng 2 chiều vùa tạo là: ${minArr2d(arr)} </br>`);
+    document.write(`Phần tử lớn nhất trong mảng 2 chiều vừa tạo là: ${maxArr2d(arr)}`);
+</script>
+</body>
+</html>
