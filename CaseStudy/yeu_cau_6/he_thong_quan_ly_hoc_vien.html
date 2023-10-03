@@ -1,10 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Học Viên</title>
+    <style>
+        table {
+            border-spacing: 0;
+            width: 1916px;
+            margin-left: -6px
+        }
+
+        button {
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s,
+            color 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #2980B9;
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        th, td {
+            border: 1px solid #E0E0E0;
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2980B9;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F2F2F2;
+        }
+
+        tr:hover {
+            background-color: #E0E0E0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-$END$
+<h1>HỆ THỐNG QUẢN LÝ HỌC VIÊN </h1>
+<div id="display"></div>
+<br>
+<br>
+<button type="button" onclick="addNewStudent(studentList)">Thêm mới</button>
+<button type="button" onclick="editStudent(studentList)">Sửa thông tin học viên</button>
+<button type="button" onclick="deleteStudent(studentList)">Xoá học viên</button>
+<script>
+    class Student {
+        constructor(ID, MHV, name, className, email, birthDay, module) {
+            this.ID = ID;
+            this.MHV = MHV;
+            this.name = name;
+            this.className = className;
+            this.email = email;
+            this.birthDay = birthDay;
+            this.module = module;
+        }
+
+        getID() {
+            return this.ID;
+        }
+
+        setID() {
+            return (studentList[studentList.length - 1].ID + 1);// ID tự động tăng
+        }
+
+        getMHV() {
+            return this.MHV;
+        }
+
+        setMHV(newMHV) {
+            return (!isNaN(newMHV) && newMHV > 0 && newMHV.length === 4)
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        setName(newName) {
+            return (isNaN(newName));
+        }
+
+        getClassName() {
+            return this.className;
+        }
+
+        setClassName(newClassName) {
+            return (isNaN(newClassName));
+        }
+
+        getEmail() {
+            return this.email;
+        }
+
+        setEmail(newEmail) {
+            return (isNaN(newEmail));
+        }
+
+        getBirthDay() {
+            return this.birthDay;
+        }
+
+        setBirthDay(newBirthDay) {
+            newBirthDay = newBirthDay.split('/')
+            return (newBirthDay[0] <= 31 && newBirthDay[1] <= 12 && newBirthDay[2] <= 9999);
+        }
+
+        getModule() {
+            return this.module;
+        }
+
+        setModule(newModule) {
+            return (!isNaN(newModule) && newModule > 0 && newModule < 7 && newModule % 1 === 0);
+        }
+
+    }
+
+    let student1 = new Student(1, 1111, 'Nguyễn Văn An', 'C0823G1', 'AnNV@gmail.com', '05/07/2000', 1);
+    let student2 = new Student(2, 2222, 'Trần Văn Bình', 'C0623G1', 'BinhTV@gmail.com', '01/01/2001', 3);
+    let student3 = new Student(3, 3333, 'Phạm Thị Chi', 'C0423G1', 'ChiPT@gmail.com', '30/08/2002', 6);
+    let studentList = [student1, student2, student3]
+    console.log(studentList)
+
+    function display(arr) {
+        let table = `<table>
+         <tr>
+            <th>Mã học viên</th>
+            <th>Tên</th>
+            <th>Lớp</th>
+            <th>Email</th>
+            <th>Ngày sinh</th>
+            <th>Module</th>
+           </tr>`
+        for (let i = 0; i < arr.length; i++) {
+            table += `<tr>
+            <td>HV - ${arr[i].getMHV()} </td>
+            <td>${arr[i].getName()}</td>
+            <td>${arr[i].getClassName()}</td>
+            <td>${arr[i].getEmail()}</td>
+            <td>${arr[i].getBirthDay()}</td>
+            <td>${arr[i].getModule()}</td>
+            </tr>`
+        }
+        table += `</table>`
+        document.getElementById('display').innerHTML = table;
+    }
+
+    display(studentList)
+
+    function addNewStudent(arr) {
+        let newStudent = new Student();
+        let newID = newStudent.setID();
+        let newMHV;
+        do {
+            newMHV = checkInput('mã học viên mới:');
+            for (let i = 0; i < arr.length; i++) {
+                if (newMHV.localeCompare(arr[i].getMHV()) === 0) {
+                    alert('Mã học viên này dã tồn tại');
+                    return;
+                }
+            }
+            if (newStudent.setMHV(newMHV)) {
+                break;
+            } else {
+                alert('Bạn cần nhập mã hoc viên là 4 chữ số');
+            }
+        } while (true);
+        let newName;
+        do {
+            newName = checkInput('tên mới:');
+            if (newStudent.setName(newName)) {
+                break;
+            } else {
+                alert('Nhập kí tự hoặc chuỗi kí tự cho tên');
+            }
+        } while (true);
+        let newClassName;
+        do {
+            newClassName = checkInput('tên lớp mới:');
+            if (newStudent.setClassName(newClassName)) {
+                break;
+            } else {
+                alert('Nhập kí tự hoặc chuỗi kí tự cho tên lớp');
+            }
+        } while (true);
+        let newEmail;
+        do {
+            newEmail = checkInput('email mới:');
+            if (newStudent.setEmail(newEmail)) {
+                break;
+            } else {
+                alert('Nhập kí tự hoặc chuỗi kí tự cho email');
+            }
+        } while (true);
+        let newBirthDay;
+        do {
+            newBirthDay = checkInput('Ngày/Tháng/Năm sinh mới:');
+            if (newStudent.setBirthDay(newBirthDay)) {
+                break;
+            } else {
+                alert('Vui lòng nhập đúng định dạng ngày sinh VD:02/09/2001');
+            }
+        } while (true);
+        let newModule;
+        do {
+            newModule = checkInput('module mới:');
+            if (newStudent.setModule(newModule)) {
+                break;
+            } else {
+                alert('Bạn cần nhập số nguyên từ 1 đến 6');
+            }
+        } while (true);
+        arr.push(new Student(newID, newMHV, newName, newClassName, newEmail, newBirthDay, newModule));
+        alert('Bạn đã thêm mới học viên thành công');
+        display(arr);
+    }
+
+    function editStudent(arr) {
+        let idEdit = checkInput('ID học viên bạn muốn sửa');
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (idEdit.localeCompare(arr[i].getID()) === 0) {
+                count = 1;
+                let check = confirm(`Bạn đang muốn sửa thông tin của học viên [ ${arr[i].getName()} ] phải không?`)
+                if (check === true) {
+                    let newName;
+                    do {
+                        newName = prompt('Nhập chỉnh sửa của bạn cho tên:', arr[i].getName());
+                        if (arr[i].setName(newName)) {
+                            arr[i].name = newName;
+                            break;
+                        } else {
+                            alert('Nhập kí tự hoặc chuỗi kí tự cho tên');
+                        }
+                    } while (true);
+                    let newClassName;
+                    do {
+                        newClassName = prompt('Nhập chỉnh sửa của bạn cho tên lớp:', arr[i].getClassName());
+                        if (arr[i].setClassName(newClassName)) {
+                            arr[i].className = newClassName;
+                            break;
+                        } else {
+                            alert('Nhập kí tự hoặc chuỗi kí tự cho tên lớp');
+                        }
+                    } while (true);
+                    let newEmail;
+                    do {
+                        newEmail = prompt('Nhập chỉnh sửa của bạn cho Email:', arr[i].getEmail());
+                        if (arr[i].setEmail(newEmail)) {
+                            arr[i].email = newEmail;
+                            break;
+                        } else {
+                            alert('Nhập kí tự hoặc chuỗi kí tự cho Email');
+                        }
+                    } while (true);
+                    let newBirthDay;
+                    do {
+                        newBirthDay = prompt('Nhập chỉnh sửa của bạn cho ngày sinh học viên:', arr[i].getBirthDay());
+                        if (arr[i].setBirthDay(newBirthDay)) {
+                            arr[i].birthDay = newBirthDay;
+                            break;
+                        } else {
+                            alert('Vui lòng nhập đúng định dạng ngày sinh VD:02/09/2001');
+                        }
+                    } while (true);
+                    let newModule;
+                    do {
+                        newModule = prompt('Nhập chỉnh sửa của bạn cho Module:', arr[i].getModule());
+                        if (arr[i].setModule(newModule)) {
+                            arr[i].module = newModule;
+                            break;
+                        } else {
+                            alert('Nhập kí tự hoặc chuỗi kí tự cho Module');
+                        }
+                    } while (true);
+                }
+                alert('Bạn đã thay đổi thông tin học viên thành công')
+            }
+        }
+        if (count === 0) {
+            alert('ID học viên bạn vừa nhập không tồn tại');
+        }
+        display(arr);
+    }
+
+    function deleteStudent(arr) {
+        let idDelete = checkInput('ID học viên bạn muốn xoá');
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (idDelete.localeCompare(arr[i].getID()) === 0) {
+                count = 1;
+                let decision = confirm(`Bạn có chắc muốn xóa học viên [ ${arr[i].name} ] khỏi danh sách không?`);
+                if (decision === true) {
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        if (count === 0) {
+            alert('ID học viên bạn vừa nhập không tồn tại');
+        }
+        display(arr);
+
+    }
+
+    function checkInput(i) {
+        let input = prompt(`Nhập ${i}`);
+        while (true) {
+            if (input !== null && input !== undefined && input !== "") {
+                return input;
+            } else {
+                alert(`Không được để trống ${i}`);
+                input = prompt(`Nhập ${i}`);
+            }
+        }
+    }
+</script>
 </body>
 </html>
